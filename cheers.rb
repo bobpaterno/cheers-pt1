@@ -9,6 +9,8 @@
 #
 # Note the "a" vs "an"
 #
+require 'date'
+
 puts "What's your name"
 
 name = gets
@@ -25,3 +27,24 @@ name.each_char do |char|
   puts outStr+" #{char}"
 end
 puts "#{name.upcase}'s just GRAND!"
+
+puts "Hey #{name}, what's your birthday (yyyy/mm/dd)?"
+bday = gets
+bday = Date.parse(bday)
+day = bday.day
+month = bday.mon
+
+today = Date.today
+thisBday  = Date.new(today.year, month, day).jd
+todayJd = today.jd
+
+daysUntil = thisBday-todayJd
+
+if thisBday-todayJd < 0
+  thisBday  = Date.new(today.year+1, month, day).jd
+  daysUntil = thisBday-todayJd
+end
+
+outStr = "Awesome! Your birthday is in #{daysUntil} days! Happy Birthday in advance! "
+puts outStr
+
